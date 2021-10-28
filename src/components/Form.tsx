@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, ChangeEvent } from 'react';
 
 const Form = (): JSX.Element => {
@@ -6,11 +5,10 @@ const Form = (): JSX.Element => {
     target: HTMLInputElement;
   }
   const [input, setInput] = useState('');
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setInput(value);
   };
-  const spaceOrNewline = new RegExp(/[\s\n]+/gm);
 
   const handleSubmit = () => {};
 
@@ -21,8 +19,8 @@ const Form = (): JSX.Element => {
         name="site"
         placeholder="Enter your keywords"
         value={input}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          handleInputChange(event)
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+          handleInputChange(e)
         }
       />
 
