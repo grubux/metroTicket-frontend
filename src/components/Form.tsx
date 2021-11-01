@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import EuroIcon from '@mui/icons-material/Euro';
 
 const Form = (): JSX.Element => {
   const [inputList, setInputList] = useState([{ articleName: '' }]);
@@ -37,31 +38,59 @@ const Form = (): JSX.Element => {
       {inputList.map((x, i: number) => {
         return (
           <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <FormControl
-              style={{ marginTop: '10px', width: '200px', minWidth: '200px' }}
-            >
-              <InputLabel htmlFor="component-outlined">Name</InputLabel>
-              <OutlinedInput
-                id="component-outlined"
-                value={x.articleName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, i)
-                }
-                label="Name"
-              />
-            </FormControl>
-            {inputList.length !== 1 && (
-              <DeleteIcon
-                style={{ margin: 'auto' }}
-                onClick={() => handleRemoveClick(i)}
-              />
-            )}
-            {inputList.length - 1 === i && (
-              <AddCircleOutlineIcon
-                style={{ margin: 'auto', marginLeft: '5px' }}
-                onClick={() => handleAddClick()}
-              />
-            )}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div>
+                <FormControl
+                  style={{ marginTop: '10px', width: '60%', minWidth: '60%' }}
+                >
+                  <InputLabel htmlFor="component-outlined">name</InputLabel>
+                  <OutlinedInput
+                    id="component-outlined"
+                    value={x.articleName}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleInputChange(e, i)
+                    }
+                    label="Name"
+                  />
+                </FormControl>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <div>
+                  <FormControl
+                    style={{
+                      marginTop: '10px',
+                      width: '90px',
+                      minWidth: '100px',
+                    }}
+                  >
+                    <InputLabel htmlFor="component-outlined">price</InputLabel>
+                    <OutlinedInput
+                      id="component-outlined"
+                      value={x.articleName}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputChange(e, i)
+                      }
+                      label="Name"
+                    />
+                  </FormControl>
+                </div>
+              </div>
+            </div>
+            <div className="icons-wrapper">
+              <div>
+                <EuroIcon />
+              </div>
+              <div>
+                {inputList.length !== 1 && (
+                  <DeleteIcon onClick={() => handleRemoveClick(i)} />
+                )}
+              </div>
+              <div>
+                {inputList.length - 1 === i && (
+                  <AddCircleOutlineIcon onClick={() => handleAddClick()} />
+                )}
+              </div>
+            </div>
           </div>
         );
       })}

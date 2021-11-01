@@ -38,20 +38,14 @@
   margin-top: 100px;
 }
 
-.textarea {
-  width: 100%;
-  min-height: 100%;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #cbe9f6;
-  font-size: 16px;
-  resize: none;
+.icons-wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 15px;
 }
 
 .send-button {
-  background-image: linear-gradient(to right, red, #2e7bb1);
+  background-image: linear-gradient(to right, red, #0a224b);
   border: none;
   color: white;
   padding: 16px 16px;
