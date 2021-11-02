@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
 const Header = (): JSX.Element => {
-  const test = 0;
   return (
     <div className="header">
       <img
