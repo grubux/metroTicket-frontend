@@ -27,11 +27,8 @@ const Form = (): JSX.Element => {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ): void => {
-    const onlyNums = e.target.value;
-    // .replace(/^[1-9.]\d*(\d+)?$/i, '');
-
     const list = [...inputList];
-    list[index].price = parseFloat(onlyNums);
+    list[index].price = parseFloat(e.target.value);
 
     setInputList(list);
   };
