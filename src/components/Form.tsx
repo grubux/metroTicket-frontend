@@ -39,11 +39,18 @@ const Form = (): JSX.Element => {
     <span className="form">
       {inputList.map((x, i) => {
         return (
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              width: '95%',
+            }}
+          >
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
+                width: '100%',
               }}
             >
               <div>
