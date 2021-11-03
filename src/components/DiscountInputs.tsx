@@ -26,17 +26,8 @@ const DiscountInputs = ({
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '60%',
-        margin: 'auto auto 2% auto',
-
-        justifyContent: 'center',
-        backgroundColor: 'blue',
-      }}
-    >
-      <span style={{ display: 'flex' }}>
+    <div className="discountinputs-container">
+      <span className="flex">
         <FormControl fullWidth sx={{ m: 0.3 }} variant="filled">
           <InputLabel htmlFor="filled-adornment-amount">
             Food discount

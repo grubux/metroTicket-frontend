@@ -60,11 +60,39 @@
 }
 
 .finalprices-container {
-  margin: '5% auto auto auto';
+  margin: 'auto 0';
+  font-size: '20px';
 }
 
 .final-price {
   color: #52b202;
   display: flex;
   justify-content: space-between;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: 'center';
+}
+
+.flex {
+  display: flex;
+}
+
+.discountinputs-container {
+  display: flex;
+  width: 60%;
+  margin: auto auto 2% auto;
+  justify-content: center;
+}
+
+.icon-add {
+  margin-left: 10px;
+}
+
+.radiobuttons-label {
+  width: 2px;
+  height: 2px;
 }

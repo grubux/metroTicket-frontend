@@ -33,7 +33,7 @@ const Icons = ({
           <DeleteIcon onClick={() => handleRemoveClick(index)} />
         )}
       </div>
-      <div style={{ marginLeft: '10px' }}>
+      <div className="icon-add">
         {inputList.length - 1 === index && (
           <AddCircleOutlineIcon onClick={() => handleAddClick()} />
         )}
