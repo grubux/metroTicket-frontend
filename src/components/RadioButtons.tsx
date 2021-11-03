@@ -8,10 +8,12 @@ const RadioButtons = ({
   index,
   handleVAT,
   setIsFood,
+  handleIsFood,
 }: {
   index: number;
   handleVAT: any;
   setIsFood: any;
+  handleIsFood: any;
 }): JSX.Element => {
   return (
     <div className="checkboxes-wrapper">
@@ -36,12 +38,12 @@ const RadioButtons = ({
               }}
               value="food"
               label={<span style={{ fontSize: '10px' }}>food</span>}
-              control={<Radio onClick={() => setIsFood(true)} />}
+              control={<Radio onClick={() => handleIsFood(true, index)} />}
             />
             <FormControlLabel
               value="notFood"
-              control={<Radio onClick={() => setIsFood(false)} />}
               label={<span style={{ fontSize: '10px' }}>not&nbsp;food</span>}
+              control={<Radio onClick={() => handleIsFood(false, index)} />}
             />
           </RadioGroup>
         </FormControl>

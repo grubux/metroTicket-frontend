@@ -16,8 +16,7 @@ const Form = (): JSX.Element => {
   const [inputList, setInputList] = useState([
     { articleName: '', price: 0, VAT: 'D', isFood: true },
   ]);
-  const [VATIs20, setVATIs20] = useState(true);
-  const [isFood, setIsFood] = useState(true);
+  const [isFood, setIsFood] = useState(false);
 
   const handleInputNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -47,6 +46,11 @@ const Form = (): JSX.Element => {
     } else {
       list[index].VAT = 'B';
     }
+  };
+
+  const handleIsFood = (bool: boolean, index: number) => {
+    const list = [...inputList];
+    list[index].isFood = bool;
   };
 
   const handleSubmit = () => {
@@ -118,6 +122,7 @@ const Form = (): JSX.Element => {
                     index={i}
                     handleVAT={handleVAT}
                     setIsFood={setIsFood}
+                    handleIsFood={handleIsFood}
                   />
                   <Icons
                     index={i}
