@@ -5,7 +5,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 const DiscountInputs = ({
   discountFood,
-
   setDiscountFood,
   discountNotFood,
   setDiscountNotFood,
@@ -15,7 +14,16 @@ const DiscountInputs = ({
   discountNotFood: number;
   setDiscountNotFood: any;
 }): JSX.Element => {
-  const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>): void => {};
+  // const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>): void => {};
+  const handleDiscountFood = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setDiscountFood(parseFloat(e.target.value));
+  };
+
+  const handleDiscountNotFood = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setDiscountNotFood(parseFloat(e.target.value));
+  };
 
   return (
     <div
@@ -36,7 +44,7 @@ const DiscountInputs = ({
             id="filled-adornment-amount"
             value={discountFood}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleDiscount(e)
+              handleDiscountFood(e)
             }
             startAdornment={<InputAdornment position="start">€</InputAdornment>}
           />
@@ -50,9 +58,9 @@ const DiscountInputs = ({
           <FilledInput
             type="number"
             id="filled-adornment-amount"
-            value={discountFood}
+            value={discountNotFood}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleDiscount(e)
+              handleDiscountNotFood(e)
             }
             startAdornment={<InputAdornment position="start">€</InputAdornment>}
           />

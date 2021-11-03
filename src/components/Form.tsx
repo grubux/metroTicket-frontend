@@ -16,7 +16,6 @@ const Form = (): JSX.Element => {
   const [inputList, setInputList] = useState([
     { articleName: '', price: 0, VAT: 'D', isFood: true },
   ]);
-  const [isFood, setIsFood] = useState(false);
 
   const handleInputNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -54,15 +53,20 @@ const Form = (): JSX.Element => {
   };
 
   const handleSubmit = () => {
-    console.log(inputList);
+    const toSend = [];
+    const list = [...inputList];
+    toSend.push(list);
+    toSend.push({ discountFood });
+    toSend.push({ discountNotFood });
+    console.log(toSend);
   };
 
   return (
     <span className="form">
       <DiscountInputs
         discountFood={discountFood}
-        discountNotFood={discountNotFood}
         setDiscountFood={setDiscountFood}
+        discountNotFood={discountNotFood}
         setDiscountNotFood={setDiscountNotFood}
       />
       {inputList.map((x, i) => {
@@ -121,7 +125,6 @@ const Form = (): JSX.Element => {
                   <RadioButtons
                     index={i}
                     handleVAT={handleVAT}
-                    setIsFood={setIsFood}
                     handleIsFood={handleIsFood}
                   />
                   <Icons

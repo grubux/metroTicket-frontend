@@ -7,12 +7,10 @@ import FormLabel from '@mui/material/FormLabel';
 const RadioButtons = ({
   index,
   handleVAT,
-  setIsFood,
   handleIsFood,
 }: {
   index: number;
   handleVAT: any;
-  setIsFood: any;
   handleIsFood: any;
 }): JSX.Element => {
   return (
