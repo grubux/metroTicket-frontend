@@ -12,6 +12,7 @@ import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
   // TODO: Add quantity input
+  // TODO: responsive, when on large computer screens, do not get huge inputs, haveto put a max width.
   const [discountFood, setDiscountFood] = useState(0);
   const [discountNotFood, setDiscountNotFood] = useState(0);
   const [inputList, setInputList] = useState([
