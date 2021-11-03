@@ -64,3 +64,13 @@
   cursor: pointer;
   border-radius: 3%;
 }
+
+.finalprices-container {
+  margin: '5% auto auto auto';
+}
+
+.final-price {
+  color: #52b202;
+  display: flex;
+  justify-content: space-between;
+}

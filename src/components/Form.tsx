@@ -8,6 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import DiscountInputs from './DiscountInputs';
 import Icons from './Icons';
 import RadioButtons from './RadioButtons';
+import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
   const [discountFood, setDiscountFood] = useState(0);
@@ -63,7 +64,7 @@ const Form = (): JSX.Element => {
               }}
             >
               <div>
-                <FormControl style={{ marginTop: '10px', width: '100%' }}>
+                <FormControl style={{ marginTop: '5px', width: '100%' }}>
                   <InputLabel htmlFor="component-outlined">name</InputLabel>
                   <OutlinedInput
                     id="component-outlined"
@@ -109,6 +110,14 @@ const Form = (): JSX.Element => {
                   setInputList={setInputList}
                   inputList={inputList}
                 />
+              </div>
+              <div
+                style={{
+                  margin: 'auto 0',
+                  fontSize: '20px',
+                }}
+              >
+                <FinalPrices finalPrice="0.42€" />
               </div>
             </div>
           </div>
