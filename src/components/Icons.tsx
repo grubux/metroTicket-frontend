@@ -20,7 +20,10 @@ const Icons = ({
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { articleName: '' }]);
+    setInputList([
+      ...inputList,
+      { articleName: '', price: 0, VAT: 'D', isFood: true },
+    ]);
   };
 
   return (

@@ -5,21 +5,14 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 const RadioButtons = ({
-  checkbox5,
-  setCheckbox5,
-  checkbox20,
-  setCheckbox20,
+  index,
+  handleVAT,
+  setIsFood,
 }: {
-  checkbox5: boolean;
-  setCheckbox5: any;
-  checkbox20: boolean;
-  setCheckbox20: any;
+  index: number;
+  handleVAT: any;
+  setIsFood: any;
 }): JSX.Element => {
-  const handleCheckboxes = (bool: boolean, setBool: any): void => {
-    setBool(!bool);
-    console.log(!bool);
-  };
-
   return (
     <div className="checkboxes-wrapper">
       <div>
@@ -43,20 +36,11 @@ const RadioButtons = ({
               }}
               value="food"
               label={<span style={{ fontSize: '10px' }}>food</span>}
-              control={
-                <Radio
-                  onClick={() => handleCheckboxes(checkbox5, setCheckbox5)}
-                />
-              }
+              control={<Radio onClick={() => setIsFood(true)} />}
             />
             <FormControlLabel
               value="notFood"
-              control={
-                <Radio
-                  defaultChecked
-                  onClick={() => handleCheckboxes(checkbox20, setCheckbox20)}
-                />
-              }
+              control={<Radio onClick={() => setIsFood(false)} />}
               label={<span style={{ fontSize: '10px' }}>not&nbsp;food</span>}
             />
           </RadioGroup>
@@ -83,21 +67,12 @@ const RadioButtons = ({
               }}
               value="5"
               label={<span style={{ fontSize: '10px' }}>5.5%</span>}
-              control={
-                <Radio
-                  onClick={() => handleCheckboxes(checkbox5, setCheckbox5)}
-                />
-              }
+              control={<Radio onClick={() => handleVAT(false, index)} />}
             />
             <FormControlLabel
               value="20"
-              control={
-                <Radio
-                  defaultChecked
-                  onClick={() => handleCheckboxes(checkbox20, setCheckbox20)}
-                />
-              }
               label={<span style={{ fontSize: '10px' }}>20%</span>}
+              control={<Radio onClick={() => handleVAT(true, index)} />}
             />
           </RadioGroup>
         </FormControl>

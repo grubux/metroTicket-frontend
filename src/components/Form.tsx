@@ -13,9 +13,11 @@ import FinalPrices from './FinalPrices';
 const Form = (): JSX.Element => {
   const [discountFood, setDiscountFood] = useState(0);
   const [discountNotFood, setDiscountNotFood] = useState(0);
-  const [inputList, setInputList] = useState([{ articleName: '', price: 0 }]);
-  const [checkbox5, setCheckbox5] = useState(false);
-  const [checkbox20, setCheckbox20] = useState(true);
+  const [inputList, setInputList] = useState([
+    { articleName: '', price: 0, VAT: 'D', isFood: true },
+  ]);
+  const [VATIs20, setVATIs20] = useState(true);
+  const [isFood, setIsFood] = useState(true);
 
   const handleInputNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -37,7 +39,19 @@ const Form = (): JSX.Element => {
     setInputList(list);
   };
 
-  const handleSubmit = () => {};
+  const handleVAT = (bool: boolean, index: number) => {
+    const list = [...inputList];
+
+    if (bool === true) {
+      list[index].VAT = 'D';
+    } else {
+      list[index].VAT = 'B';
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log(inputList);
+  };
 
   return (
     <span className="form">
@@ -49,75 +63,76 @@ const Form = (): JSX.Element => {
       />
       {inputList.map((x, i) => {
         return (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              width: '95%',
-            }}
-          >
+          <div>
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
+                flexDirection: 'row',
+                width: '95%',
               }}
             >
-              <div>
-                <FormControl style={{ marginTop: '5px', width: '100%' }}>
-                  <InputLabel htmlFor="component-outlined">name</InputLabel>
-                  <OutlinedInput
-                    id="component-outlined"
-                    value={x.articleName}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleInputNameChange(e, i)
-                    }
-                    label="Name"
-                  />
-                </FormControl>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <FormControl
-                  fullWidth
-                  sx={{ m: 0.3 }}
-                  variant="filled"
-                  style={{ width: '100%' }}
-                >
-                  <InputLabel htmlFor="filled-adornment-amount">
-                    Price
-                  </InputLabel>
-                  <FilledInput
-                    type="number"
-                    id="filled-adornment-amount"
-                    value={x.price}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleInputPriceChange(e, i)
-                    }
-                    startAdornment={
-                      <InputAdornment position="start">€</InputAdornment>
-                    }
-                  />
-                </FormControl>
-
-                <RadioButtons
-                  checkbox5={checkbox5}
-                  setCheckbox5={setCheckbox5}
-                  checkbox20={checkbox20}
-                  setCheckbox20={setCheckbox20}
-                />
-                <Icons
-                  index={i}
-                  setInputList={setInputList}
-                  inputList={inputList}
-                />
-              </div>
               <div
                 style={{
-                  margin: 'auto 0',
-                  fontSize: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
                 }}
               >
-                <FinalPrices finalPrice="0.42€" />
+                <div>
+                  <FormControl style={{ marginTop: '5px', width: '100%' }}>
+                    <InputLabel htmlFor="component-outlined">name</InputLabel>
+                    <OutlinedInput
+                      id="component-outlined"
+                      value={x.articleName}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputNameChange(e, i)
+                      }
+                      label="Name"
+                    />
+                  </FormControl>
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <FormControl
+                    fullWidth
+                    sx={{ m: 0.3 }}
+                    variant="filled"
+                    style={{ width: '100%' }}
+                  >
+                    <InputLabel htmlFor="filled-adornment-amount">
+                      Price
+                    </InputLabel>
+                    <FilledInput
+                      type="number"
+                      id="filled-adornment-amount"
+                      value={x.price}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputPriceChange(e, i)
+                      }
+                      startAdornment={
+                        <InputAdornment position="start">€</InputAdornment>
+                      }
+                    />
+                  </FormControl>
+
+                  <RadioButtons
+                    index={i}
+                    handleVAT={handleVAT}
+                    setIsFood={setIsFood}
+                  />
+                  <Icons
+                    index={i}
+                    setInputList={setInputList}
+                    inputList={inputList}
+                  />
+                </div>
+                <div
+                  style={{
+                    margin: 'auto 0',
+                    fontSize: '20px',
+                  }}
+                >
+                  <FinalPrices finalPrice="0.42€" />
+                </div>
               </div>
             </div>
           </div>
