@@ -63,29 +63,30 @@ const Form = (): JSX.Element => {
 
   return (
     <span className="form">
-      <DiscountInputs
-        discountFood={discountFood}
-        setDiscountFood={setDiscountFood}
-        discountNotFood={discountNotFood}
-        setDiscountNotFood={setDiscountNotFood}
-      />
-      {inputList.map((x, i) => {
-        return (
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                width: '95%',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                }}
-              >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            justifyContent: 'center',
+          }}
+        >
+          <DiscountInputs
+            discountFood={discountFood}
+            setDiscountFood={setDiscountFood}
+            discountNotFood={discountNotFood}
+            setDiscountNotFood={setDiscountNotFood}
+          />
+          {inputList.map((x, i) => {
+            return (
+              <div>
                 <div>
                   <FormControl style={{ marginTop: '5px', width: '100%' }}>
                     <InputLabel htmlFor="component-outlined">name</InputLabel>
@@ -142,10 +143,10 @@ const Form = (): JSX.Element => {
                   <FinalPrices finalPrice="0.42€" />
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
       <button
         className="send-button"
         onClick={() => {

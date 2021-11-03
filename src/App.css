@@ -18,16 +18,10 @@
 
 .body-container {
   min-height: 90%;
-  /* background-color: #f79696; */
+  background-color: #f2e8dc;
   display: flex;
   flex-direction: column;
   margin: auto;
-}
-.counter {
-  color: lightpink;
-  font-size: 3em;
-  text-align: center;
-  padding-top: 50px;
 }
 
 .form {

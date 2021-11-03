@@ -29,9 +29,11 @@ const DiscountInputs = ({
     <div
       style={{
         display: 'flex',
-        width: '70%',
-        marginBottom: '2%',
+        width: '60%',
+        margin: 'auto auto 2% auto',
+
         justifyContent: 'center',
+        backgroundColor: 'blue',
       }}
     >
       <span style={{ display: 'flex' }}>
