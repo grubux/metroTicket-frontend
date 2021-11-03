@@ -11,6 +11,7 @@ import RadioButtons from './RadioButtons';
 import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
+  // TODO: Add quantity input
   const [discountFood, setDiscountFood] = useState(0);
   const [discountNotFood, setDiscountNotFood] = useState(0);
   const [inputList, setInputList] = useState([
@@ -73,18 +74,43 @@ const Form = (): JSX.Element => {
         {inputList.map((x, i) => {
           return (
             <div>
-              <div>
-                <FormControl style={{ marginTop: '5px', width: '100%' }}>
-                  <InputLabel htmlFor="component-outlined">name</InputLabel>
-                  <OutlinedInput
-                    id="component-outlined"
-                    value={x.articleName}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleInputNameChange(e, i)
-                    }
-                    label="Name"
-                  />
-                </FormControl>
+              <div className="flex">
+                <div className="articlename-wrapper">
+                  <FormControl style={{ marginTop: '5px' }}>
+                    <InputLabel htmlFor="component-outlined">name</InputLabel>
+                    <OutlinedInput
+                      id="component-outlined"
+                      value={x.articleName}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputNameChange(e, i)
+                      }
+                      label="Name"
+                    />
+                  </FormControl>
+                </div>
+                <div className="quantity-wrapper">
+                  <FormControl
+                    fullWidth
+                    sx={{ m: 0.3 }}
+                    variant="filled"
+                    style={{ width: '50%' }}
+                  >
+                    <InputLabel htmlFor="filled-adornment-amount">
+                      Quantity
+                    </InputLabel>
+                    <FilledInput
+                      type="number"
+                      id="filled-adornment-amount"
+                      value={x.price}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputPriceChange(e, i)
+                      }
+                      startAdornment={
+                        <InputAdornment position="start">€</InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                </div>
               </div>
               <div className="flex">
                 <FormControl

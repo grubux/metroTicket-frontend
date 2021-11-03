@@ -39,7 +39,7 @@ const DiscountInputs = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleDiscountFood(e)
             }
-            startAdornment={<InputAdornment position="start">€</InputAdornment>}
+            startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
         </FormControl>
       </span>
@@ -55,7 +55,7 @@ const DiscountInputs = ({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleDiscountNotFood(e)
             }
-            startAdornment={<InputAdornment position="start">€</InputAdornment>}
+            startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
         </FormControl>
       </span>

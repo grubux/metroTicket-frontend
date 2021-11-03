@@ -92,7 +92,12 @@
   margin-left: 10px;
 }
 
-.radiobuttons-label {
-  width: 2px;
-  height: 2px;
+.quantity-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.articlename-wrapper {
+  width: 70%;
 }
