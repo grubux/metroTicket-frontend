@@ -5,10 +5,13 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import DiscountInputs from './DiscountInputs';
 import Icons from './Icons';
-import Checkboxes from './Checkboxes';
+import RadioButtons from './RadioButtons';
 
 const Form = (): JSX.Element => {
+  const [discountFood, setDiscountFood] = useState(0);
+  const [discountNotFood, setDiscountNotFood] = useState(0);
   const [inputList, setInputList] = useState([{ articleName: '', price: 0 }]);
   const [checkbox5, setCheckbox5] = useState(false);
   const [checkbox20, setCheckbox20] = useState(true);
@@ -37,6 +40,12 @@ const Form = (): JSX.Element => {
 
   return (
     <span className="form">
+      <DiscountInputs
+        discountFood={discountFood}
+        discountNotFood={discountNotFood}
+        setDiscountFood={setDiscountFood}
+        setDiscountNotFood={setDiscountNotFood}
+      />
       {inputList.map((x, i) => {
         return (
           <div
@@ -89,7 +98,7 @@ const Form = (): JSX.Element => {
                   />
                 </FormControl>
 
-                <Checkboxes
+                <RadioButtons
                   checkbox5={checkbox5}
                   setCheckbox5={setCheckbox5}
                   checkbox20={checkbox20}
