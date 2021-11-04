@@ -22,7 +22,14 @@ const Icons = ({
   const handleAddClick = () => {
     setInputList([
       ...inputList,
-      { articleName: '', price: 0, VAT: 'D', isFood: true },
+      {
+        articleName: '',
+        price: 0,
+        VATType: 'D',
+        isFood: true,
+        quantity: 1,
+        index: index + 1,
+      },
     ]);
   };
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import axios from 'axios';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 
 import DiscountInputs from './DiscountInputs';
 import Icons from './Icons';
@@ -11,13 +13,20 @@ import RadioButtons from './RadioButtons';
 import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
-  // TODO: Add quantity input
   // TODO: responsive, when on large computer screens, do not get huge inputs, haveto put a max width.
   const [discountFood, setDiscountFood] = useState(0);
   const [discountNotFood, setDiscountNotFood] = useState(0);
   const [inputList, setInputList] = useState([
-    { articleName: '', price: 0, VAT: 'D', isFood: true },
+    {
+      articleName: '',
+      price: 0,
+      VATType: 'D',
+      isFood: true,
+      quantity: 1,
+      index: 0,
+    },
   ]);
+  const [data, setData] = useState();
 
   const handleInputNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -35,17 +44,28 @@ const Form = (): JSX.Element => {
   ): void => {
     const list = [...inputList];
     list[index].price = parseFloat(e.target.value);
+    list[index].index = index;
 
     setInputList(list);
   };
 
-  const handleVAT = (bool: boolean, index: number) => {
+  const handleQuantityChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const list = [...inputList];
+    list[index].quantity = parseFloat(e.target.value);
+
+    setInputList(list);
+  };
+
+  const handleVATType = (bool: boolean, index: number) => {
     const list = [...inputList];
 
     if (bool === true) {
-      list[index].VAT = 'D';
+      list[index].VATType = 'D';
     } else {
-      list[index].VAT = 'B';
+      list[index].VATType = 'B';
     }
   };
 
@@ -54,13 +74,20 @@ const Form = (): JSX.Element => {
     list[index].isFood = bool;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const url = 'http://localhost:3003/api/v1/count';
     const toSend = [];
     const list = [...inputList];
     toSend.push(list);
     toSend.push({ discountFood });
     toSend.push({ discountNotFood });
-    console.log(toSend);
+
+    const finalToSend = { data: toSend };
+    await axios.post(url, finalToSend).then((response) => {
+      setData(response.data);
+      console.log('response.data: ', response.data);
+    });
+    console.log(finalToSend);
   };
 
   return (
@@ -90,36 +117,27 @@ const Form = (): JSX.Element => {
                   </FormControl>
                 </div>
                 <div className="quantity-wrapper">
-                  <FormControl
-                    fullWidth
-                    sx={{ m: 0.3 }}
-                    variant="filled"
-                    style={{ width: '50%' }}
-                  >
-                    <InputLabel htmlFor="filled-adornment-amount">
-                      Quantity
-                    </InputLabel>
-                    <FilledInput
-                      type="number"
-                      id="filled-adornment-amount"
-                      value={x.price}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleInputPriceChange(e, i)
-                      }
-                      startAdornment={
-                        <InputAdornment position="start">€</InputAdornment>
-                      }
-                    />
-                  </FormControl>
+                  <TextField
+                    style={{
+                      width: '50%',
+                      margin: 'auto',
+                    }}
+                    id="standard-number"
+                    label="quantity"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="standard"
+                    defaultValue="1"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleQuantityChange(e, i)
+                    }
+                  />
                 </div>
               </div>
-              <div className="flex">
-                <FormControl
-                  fullWidth
-                  sx={{ m: 0.3 }}
-                  variant="filled"
-                  style={{ width: '100%' }}
-                >
+              <div className="flex" style={{}}>
+                <FormControl fullWidth sx={{ m: 0.3 }} variant="filled">
                   <InputLabel htmlFor="filled-adornment-amount">
                     Price
                   </InputLabel>
@@ -138,7 +156,7 @@ const Form = (): JSX.Element => {
 
                 <RadioButtons
                   index={i}
-                  handleVAT={handleVAT}
+                  handleVATType={handleVATType}
                   handleIsFood={handleIsFood}
                 />
                 <Icons
@@ -147,9 +165,11 @@ const Form = (): JSX.Element => {
                   inputList={inputList}
                 />
               </div>
-              <div className="finalprices-container">
-                <FinalPrices finalPrice="0.42€" />
-              </div>
+              {data && (
+                <div className="finalprices-container">
+                  <FinalPrices data={data} index={i} />
+                </div>
+              )}
             </div>
           );
         })}

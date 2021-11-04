@@ -6,11 +6,11 @@ import FormLabel from '@mui/material/FormLabel';
 
 const RadioButtons = ({
   index,
-  handleVAT,
+  handleVATType,
   handleIsFood,
 }: {
   index: number;
-  handleVAT: any;
+  handleVATType: any;
   handleIsFood: any;
 }): JSX.Element => {
   return (
@@ -67,12 +67,12 @@ const RadioButtons = ({
               }}
               value="5"
               label={<span style={{ fontSize: '10px' }}>5.5%</span>}
-              control={<Radio onClick={() => handleVAT(false, index)} />}
+              control={<Radio onClick={() => handleVATType(false, index)} />}
             />
             <FormControlLabel
               value="20"
               label={<span style={{ fontSize: '10px' }}>20%</span>}
-              control={<Radio onClick={() => handleVAT(true, index)} />}
+              control={<Radio onClick={() => handleVATType(true, index)} />}
             />
           </RadioGroup>
         </FormControl>
