@@ -8,7 +8,9 @@ const FinalPrices = ({
 }): JSX.Element => {
   const handleFinalPrices = (data: any, i: number) => {
     return data?.map((finalItem: any) => {
-      return finalItem?.index === i && finalItem?.articleFinalPrice2decim;
+      return (
+        finalItem?.index === i && `= ${finalItem?.articleFinalPrice2decim}`
+      );
     });
   };
 
@@ -16,7 +18,6 @@ const FinalPrices = ({
 
   return (
     <div className="final-price">
-      =&nbsp;
       {finalPrice}
       <ArrowUpwardIcon />
     </div>
