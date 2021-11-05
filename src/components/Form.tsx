@@ -10,7 +10,10 @@ import TextField from '@mui/material/TextField';
 import DiscountInputs from './DiscountInputs';
 import Icons from './Icons';
 import RadioButtons from './RadioButtons';
-import { GlobalStateInterface, RawGlobalStateInterface } from './StateProvider';
+import {
+  // GlobalStateInterface,
+  RawGlobalStateInterface,
+} from './StateProvider';
 import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
@@ -30,7 +33,6 @@ const Form = (): JSX.Element => {
   const [rawInputList, setRawInputList] = useState<RawGlobalStateInterface[]>(
     []
   );
-  const [inputList, setInputList] = useState<GlobalStateInterface[]>([]);
 
   const [data, setData] = useState();
 
@@ -43,18 +45,6 @@ const Form = (): JSX.Element => {
     list[index].articleName = value;
     setRawInputList(list);
   };
-
-  // const handleInputPriceChange = (
-  //   e: React.ChangeEvent<HTMLInputElement>,
-  //   index: number
-  // ): void => {
-  //   const list = [...inputList];
-  //   list[index].price = parseFloat(e.target.value);
-  //   list[index].index = index;
-
-  //   setInputList(list);
-  // };
-
   const handleInputPriceChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -90,22 +80,6 @@ const Form = (): JSX.Element => {
     const list = [...rawInputList];
     list[index].isFood = bool;
   };
-
-  // const handleSubmit = async () => {
-  //   const url = 'http://localhost:3003/api/v1/count';
-  //   const toSend = [];
-  //   const list = [...inputList];
-  //   toSend.push(list);
-  //   toSend.push({ rawDiscountFood });
-  //   toSend.push({ discountNotFood });
-
-  //   const finalToSend = { data: toSend };
-  //   await axios.post(url, finalToSend).then((response) => {
-  //     setData(response.data);
-  //     console.log('response.data: ', response.data);
-  //   });
-  //   console.log(finalToSend);
-  // };
 
   const handleSubmit = async () => {
     const url = 'http://localhost:3003/api/v1/count';
@@ -149,6 +123,7 @@ const Form = (): JSX.Element => {
       index: 0,
     });
     setRawInputList(rawList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -15,5 +15,3 @@ export interface RawGlobalStateInterface {
   quantity: number;
   index: number;
 }
-
-// export { GlobalStateInterface, RawGlobalStateInterface };
