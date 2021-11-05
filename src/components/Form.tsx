@@ -36,7 +36,7 @@ const Form = ({
   rawDiscountNotFood: any;
   setRawDiscountNotFood: any;
 }): JSX.Element => {
-  // TODO: responsive, justified-content inputs blocks : left wall
+  // TODO: remove types "any
 
   useEffect(() => {
     const rawList = [...rawInputList];
