@@ -8,10 +8,12 @@ const RadioButtons = ({
   index,
   handleVATType,
   handleIsFood,
+  rawInputList,
 }: {
   index: number;
   handleVATType: any;
   handleIsFood: any;
+  rawInputList: any;
 }): JSX.Element => {
   return (
     <div className="checkboxes-wrapper">
@@ -36,12 +38,20 @@ const RadioButtons = ({
               }}
               value="food"
               label={<span style={{ fontSize: '10px' }}>food</span>}
-              control={<Radio onClick={() => handleIsFood(true, index)} />}
+              control={
+                <Radio
+                  onClick={() => handleIsFood(true, index, rawInputList)}
+                />
+              }
             />
             <FormControlLabel
               value="notFood"
               label={<span style={{ fontSize: '10px' }}>not&nbsp;food</span>}
-              control={<Radio onClick={() => handleIsFood(false, index)} />}
+              control={
+                <Radio
+                  onClick={() => handleIsFood(false, index, rawInputList)}
+                />
+              }
             />
           </RadioGroup>
         </FormControl>
@@ -67,12 +77,20 @@ const RadioButtons = ({
               }}
               value="5"
               label={<span style={{ fontSize: '10px' }}>5.5%</span>}
-              control={<Radio onClick={() => handleVATType(false, index)} />}
+              control={
+                <Radio
+                  onClick={() => handleVATType(false, index, rawInputList)}
+                />
+              }
             />
             <FormControlLabel
               value="20"
               label={<span style={{ fontSize: '10px' }}>20%</span>}
-              control={<Radio onClick={() => handleVATType(true, index)} />}
+              control={
+                <Radio
+                  onClick={() => handleVATType(true, index, rawInputList)}
+                />
+              }
             />
           </RadioGroup>
         </FormControl>
