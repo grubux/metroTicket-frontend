@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,22 +10,28 @@ import TextField from '@mui/material/TextField';
 import DiscountInputs from './DiscountInputs';
 import Icons from './Icons';
 import RadioButtons from './RadioButtons';
+import { GlobalStateInterface, RawGlobalStateInterface } from './StateProvider';
 import FinalPrices from './FinalPrices';
 
 const Form = (): JSX.Element => {
   // TODO: responsive, when on large computer screens, do not get huge inputs, haveto put a max width.
-  const [discountFood, setDiscountFood] = useState(0);
-  const [discountNotFood, setDiscountNotFood] = useState(0);
-  const [inputList, setInputList] = useState([
-    {
-      articleName: '',
-      price: 0,
-      VATType: 'D',
-      isFood: true,
-      quantity: 1,
-      index: 0,
-    },
-  ]);
+  const [rawDiscountFood, setRawDiscountFood] = useState<string>('0');
+  const [rawDiscountNotFood, setRawDiscountNotFood] = useState<string>('0');
+  // const [inputList, setInputList] = useState([
+  //   {
+  //     articleName: '',
+  //     price: 0,
+  //     VATType: 'D',
+  //     isFood: true,
+  //     quantity: 1,
+  //     index: 0,
+  //   },
+  // ]);
+  const [rawInputList, setRawInputList] = useState<RawGlobalStateInterface[]>(
+    []
+  );
+  const [inputList, setInputList] = useState<GlobalStateInterface[]>([]);
+
   const [data, setData] = useState();
 
   const handleInputNameChange = (
@@ -33,34 +39,45 @@ const Form = (): JSX.Element => {
     index: number
   ) => {
     const { value } = e.target;
-    const list = [...inputList];
+    const list = [...rawInputList];
     list[index].articleName = value;
-    setInputList(list);
+    setRawInputList(list);
   };
+
+  // const handleInputPriceChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  //   index: number
+  // ): void => {
+  //   const list = [...inputList];
+  //   list[index].price = parseFloat(e.target.value);
+  //   list[index].index = index;
+
+  //   setInputList(list);
+  // };
 
   const handleInputPriceChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ): void => {
-    const list = [...inputList];
-    list[index].price = parseFloat(e.target.value);
-    list[index].index = index;
+    const rawList = [...rawInputList];
+    rawList[index].price = e.target.value;
+    rawList[index].index = index;
 
-    setInputList(list);
+    setRawInputList(rawList);
   };
 
   const handleQuantityChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ): void => {
-    const list = [...inputList];
+    const list = [...rawInputList];
     list[index].quantity = parseFloat(e.target.value);
 
-    setInputList(list);
+    setRawInputList(list);
   };
 
   const handleVATType = (bool: boolean, index: number) => {
-    const list = [...inputList];
+    const list = [...rawInputList];
 
     if (bool === true) {
       list[index].VATType = 'D';
@@ -70,15 +87,46 @@ const Form = (): JSX.Element => {
   };
 
   const handleIsFood = (bool: boolean, index: number) => {
-    const list = [...inputList];
+    const list = [...rawInputList];
     list[index].isFood = bool;
   };
+
+  // const handleSubmit = async () => {
+  //   const url = 'http://localhost:3003/api/v1/count';
+  //   const toSend = [];
+  //   const list = [...inputList];
+  //   toSend.push(list);
+  //   toSend.push({ rawDiscountFood });
+  //   toSend.push({ discountNotFood });
+
+  //   const finalToSend = { data: toSend };
+  //   await axios.post(url, finalToSend).then((response) => {
+  //     setData(response.data);
+  //     console.log('response.data: ', response.data);
+  //   });
+  //   console.log(finalToSend);
+  // };
 
   const handleSubmit = async () => {
     const url = 'http://localhost:3003/api/v1/count';
     const toSend = [];
-    const list = [...inputList];
+    const rawList = [...rawInputList];
+    const list: any = [...rawInputList];
+
+    for (let i = 0; i < list.length; i++) {
+      list[i].articleName = rawList[i].articleName;
+      list[i].price = parseFloat(rawList[i].price);
+      list[i].VATType = rawList[i].VATType;
+      list[i].isFood = rawList[i].isFood;
+      list[i].quantity = rawList[i].quantity;
+      list[i].index = rawList[i].index;
+    }
+
     toSend.push(list);
+    console.log('rawDiscountFood: ', rawDiscountFood);
+    const discountFood = parseFloat(rawDiscountFood);
+    const discountNotFood = parseFloat(rawDiscountNotFood);
+    console.log('discountFood: ', discountFood);
     toSend.push({ discountFood });
     toSend.push({ discountNotFood });
 
@@ -90,16 +138,29 @@ const Form = (): JSX.Element => {
     console.log(finalToSend);
   };
 
+  useEffect(() => {
+    const rawList = [...rawInputList];
+    rawList.push({
+      articleName: '',
+      price: '',
+      VATType: 'D',
+      isFood: true,
+      quantity: 1,
+      index: 0,
+    });
+    setRawInputList(rawList);
+  }, []);
+
   return (
     <span className="form">
       <div className="form-container">
         <DiscountInputs
-          discountFood={discountFood}
-          setDiscountFood={setDiscountFood}
-          discountNotFood={discountNotFood}
-          setDiscountNotFood={setDiscountNotFood}
+          rawDiscountFood={rawDiscountFood}
+          setRawDiscountFood={setRawDiscountFood}
+          rawDiscountNotFood={rawDiscountNotFood}
+          setRawDiscountNotFood={setRawDiscountNotFood}
         />
-        {inputList.map((x, i) => {
+        {rawInputList.map((x, i) => {
           return (
             <div>
               <div className="flex">
@@ -136,8 +197,8 @@ const Form = (): JSX.Element => {
                   />
                 </div>
               </div>
-              <div className="flex" style={{}}>
-                <FormControl fullWidth sx={{ m: 0.3 }} variant="filled">
+              <div className="flex">
+                <FormControl fullWidth sx={{ m: 0.1 }} variant="filled">
                   <InputLabel htmlFor="filled-adornment-amount">
                     Price
                   </InputLabel>
@@ -161,8 +222,8 @@ const Form = (): JSX.Element => {
                 />
                 <Icons
                   index={i}
-                  setInputList={setInputList}
-                  inputList={inputList}
+                  setRawInputList={setRawInputList}
+                  rawInputList={rawInputList}
                 />
               </div>
               {data && (

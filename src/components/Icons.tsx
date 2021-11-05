@@ -3,28 +3,28 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Icons = ({
   index,
-  setInputList,
-  inputList,
+  setRawInputList,
+  rawInputList,
 }: {
   index: number;
-  setInputList: any;
-  inputList: { articleName: string }[];
+  setRawInputList: any;
+  rawInputList: { articleName: string }[];
 }): JSX.Element => {
   // handle click event of the Remove button
   const handleRemoveClick = (index: number) => {
-    const list = [...inputList];
+    const rawList = [...rawInputList];
 
-    list.splice(index, 1);
-    setInputList(list);
+    rawList.splice(index, 1);
+    setRawInputList(rawList);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([
-      ...inputList,
+    setRawInputList([
+      ...rawInputList,
       {
         articleName: '',
-        price: 0,
+        price: '',
         VATType: 'D',
         isFood: true,
         quantity: 1,
@@ -36,12 +36,12 @@ const Icons = ({
   return (
     <div className="icons-wrapper">
       <div>
-        {inputList.length !== 1 && (
+        {rawInputList.length !== 1 && (
           <DeleteIcon onClick={() => handleRemoveClick(index)} />
         )}
       </div>
       <div className="icon-add">
-        {inputList.length - 1 === index && (
+        {rawInputList.length - 1 === index && (
           <AddCircleOutlineIcon onClick={() => handleAddClick()} />
         )}
       </div>

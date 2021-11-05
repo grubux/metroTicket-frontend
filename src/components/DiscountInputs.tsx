@@ -4,25 +4,26 @@ import FilledInput from '@mui/material/FilledInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 const DiscountInputs = ({
-  discountFood,
-  setDiscountFood,
-  discountNotFood,
-  setDiscountNotFood,
+  rawDiscountFood,
+  setRawDiscountFood,
+  rawDiscountNotFood,
+  setRawDiscountNotFood,
 }: {
-  discountFood: number;
-  setDiscountFood: any;
-  discountNotFood: number;
-  setDiscountNotFood: any;
+  rawDiscountFood: string;
+  setRawDiscountFood: any;
+  rawDiscountNotFood: string;
+  setRawDiscountNotFood: any;
 }): JSX.Element => {
-  // const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>): void => {};
-  const handleDiscountFood = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setDiscountFood(parseFloat(e.target.value));
+  const handleRawDiscountFood = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setRawDiscountFood(e.target.value);
   };
 
   const handleDiscountNotFood = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setDiscountNotFood(parseFloat(e.target.value));
+    setRawDiscountNotFood(e.target.value);
   };
 
   return (
@@ -33,11 +34,12 @@ const DiscountInputs = ({
             Food discount
           </InputLabel>
           <FilledInput
+            placeholder="ex: 15"
             type="number"
             id="filled-adornment-amount"
-            value={discountFood}
+            // value={rawDiscountFood}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleDiscountFood(e)
+              handleRawDiscountFood(e)
             }
             startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
@@ -49,9 +51,10 @@ const DiscountInputs = ({
             not food discount
           </InputLabel>
           <FilledInput
+            placeholder="ex: 13"
             type="number"
             id="filled-adornment-amount"
-            value={discountNotFood}
+            // value={rawDiscountNotFood}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleDiscountNotFood(e)
             }
