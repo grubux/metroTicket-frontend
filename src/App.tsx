@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -10,6 +11,8 @@ import { RawGlobalStateInterface } from './components/StateProvider';
 import Form from './components/Form';
 import SendButton from './components/sendButton';
 
+require('dotenv').config();
+
 function App(): JSX.Element {
   const [rawDiscountFood, setRawDiscountFood] = useState<string>('0');
   const [rawDiscountNotFood, setRawDiscountNotFood] = useState<string>('0');
@@ -19,7 +22,6 @@ function App(): JSX.Element {
   const [data, setData] = useState();
 
   const handleSubmit = async () => {
-    const url = 'http://localhost:3003/api/v1/count';
     const toSend = [];
     const rawList = [...rawInputList];
     const list: any = [...rawInputList];
@@ -42,10 +44,12 @@ function App(): JSX.Element {
     toSend.push({ discountNotFood });
 
     const finalToSend = { data: toSend };
-    await axios.post(url, finalToSend).then((response) => {
-      setData(response.data);
-      console.log('response.data: ', response.data);
-    });
+    await axios
+      .post(process.env.REACT_APP_BACKEND_COUNT, finalToSend)
+      .then((response) => {
+        setData(response.data);
+        console.log('response.data: ', response.data);
+      });
     console.log(finalToSend);
   };
 
